@@ -21,5 +21,15 @@ import ru.consultingt1.charcountanalyzer.service.CharacterFrequencyService;
 @Loggable
 @Tag(name = "Расчет частоты символов в строке")
 public class CharacterFrequencyController {
+    private final CharacterFrequencyService frequencyService;
 
+    @PostMapping("/calculateFrequency")
+    @Operation(summary = "Расчет частоты символов в строке")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешный расчет частоты символов"),
+            @ApiResponse(responseCode = "400", description = "Неверные входные данные")
+    })
+    public ResponseEntity<FrequencyResponseDto> calculateFrequency(@Valid @RequestBody FrequencyRequestDto request) {
+        return ResponseEntity.status(HttpStatus.OK).body(frequencyService.calculateCharacterFrequency(request));
+    }
 }

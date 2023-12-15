@@ -9,5 +9,11 @@ import ru.consultingt1.charcountanalyzer.dto.FrequencyResponseDto;
  */
 public interface CharacterFrequencyService {
 
-
+    /**
+     * Метод вычисляет частоту символов в заданной строке и возвращает результат в виде объекта
+     *
+     * @param requestDto {@link FrequencyRequestDto}
+     * @return {@link FrequencyResponseDto}
+     */
+    FrequencyResponseDto calculateCharacterFrequency(FrequencyRequestDto requestDto);
 }

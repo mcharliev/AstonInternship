@@ -11,5 +11,21 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CharacterFrequencyServiceImplTest {
 
+    private CharacterFrequencyService characterFrequencyService;
 
+    @BeforeEach
+    void setUp() {
+        characterFrequencyService = new CharacterFrequencyServiceImpl();
+    }
+
+    @Test
+    void calculateCharacterFrequencyTest() {
+        FrequencyRequestDto request = new FrequencyRequestDto("aaaaabcccc");
+        FrequencyResponseDto response = characterFrequencyService.calculateCharacterFrequency(request);
+        assertNotNull(response);
+
+        assertEquals(5, response.getFrequency().getOrDefault('a', 0));
+        assertEquals(1, response.getFrequency().getOrDefault('b', 0));
+        assertEquals(4, response.getFrequency().getOrDefault('c', 0));
+    }
 }

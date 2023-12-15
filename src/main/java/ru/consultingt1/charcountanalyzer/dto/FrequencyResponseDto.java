@@ -14,5 +14,5 @@ import java.util.Map;
 @NoArgsConstructor
 public class FrequencyResponseDto {
 
-
+    private Map<Character, Integer> frequency;
 }
