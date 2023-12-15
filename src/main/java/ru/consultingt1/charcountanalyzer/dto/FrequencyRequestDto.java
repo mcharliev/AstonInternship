@@ -13,5 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FrequencyRequestDto {
-
+    @NotBlank(message = "Input string must not be blank")
+    @Size(max = 30, message = "Input string must be less than 50 characters")
+    private String inputString;
 }

@@ -18,5 +18,26 @@ import java.util.Map;
 @Loggable
 public class CharacterFrequencyServiceImpl implements CharacterFrequencyService {
 
+    /**
+     * Метод вычисляет частоту символов в заданной строке и возвращает результат в виде объекта
+     *
+     * @param requestDto {@link FrequencyRequestDto}
+     * @return {@link FrequencyResponseDto}
+     */
+    @Override
+    public FrequencyResponseDto calculateCharacterFrequency(FrequencyRequestDto requestDto) {
+        String inputString = requestDto.getInputString();
+        Map<Character, Integer> map = new HashMap<>();
 
+        for (char currentChar : inputString.toCharArray()) {
+            map.merge(currentChar, 1, Integer::sum);
+        }
+
+        Map<Character, Integer> sortedMap = new LinkedHashMap<>();
+        map.entrySet()
+                .stream()
+                .sorted(Map.Entry.<Character, Integer>comparingByValue().reversed())
+                .forEachOrdered(entry -> sortedMap.put(entry.getKey(), entry.getValue()));
+        return new FrequencyResponseDto(sortedMap);
+    }
 }
